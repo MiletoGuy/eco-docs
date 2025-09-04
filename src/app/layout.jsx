@@ -11,7 +11,7 @@ export const metadata = {
 const banner = <Banner storageKey="some-key">Nextra 4.0 is released 🎉</Banner>
 const navbar = (
   <Navbar
-    logo={<b>Nextra</b>}
+    logo={<b>Ecocentauro</b>}
     // ... Your additional navbar options
   />
 )
@@ -21,7 +21,7 @@ export default async function RootLayout({ children }) {
   return (
     <html
       // Not required, but good for SEO
-      lang="en"
+      lang="pt-br"
       // Required to be set
       dir="ltr"
       // Suggested by `next-themes` package https://github.com/pacocoursey/next-themes#with-app
@@ -35,6 +35,9 @@ export default async function RootLayout({ children }) {
       <body>
         <Layout
           // banner={banner}
+          editLink={"Edite esta página"}
+          feedback={{ content: 'Deixe seu feedback' }}
+          sidebar={{ autoCollapse: true }}
           navbar={navbar}
           pageMap={await getPageMap()}
           docsRepositoryBase="https://github.com/shuding/nextra/tree/main/docs"
