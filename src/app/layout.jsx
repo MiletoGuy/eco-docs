@@ -1,35 +1,43 @@
-import { Footer, Layout, Navbar } from 'nextra-theme-docs'
-import { Banner, Head } from 'nextra/components'
+import { Footer, LastUpdated, Layout, Navbar, NotFoundPage } from 'nextra-theme-docs'
+import { Banner, Head, Search } from 'nextra/components'
 import { getPageMap } from 'nextra/page-map'
 import 'nextra-theme-docs/style.css'
- 
+
 export const metadata = {
   // Define your metadata here
   // For more information on metadata API, see: https://nextjs.org/docs/app/building-your-application/optimizing/metadata
 }
- 
-const banner = <Banner storageKey="some-key">Nextra 4.0 is released 🎉</Banner>
+
+const banner = <Banner storageKey="some-key">Banner dahora</Banner>
 const navbar = (
   <Navbar
     logo={<b>Ecocentauro</b>}
-    // ... Your additional navbar options
+  // ... Your additional navbar options
   />
 )
 const footer = <Footer>MIT {new Date().getFullYear()} © Nextra.</Footer>
- 
+const search = <Search
+  placeholder='Pesquisar...' 
+  emptyResult='Nenhum resultado encontrado'
+  loading='Carregando...'
+  error='Erro ao buscar'
+/>
+
+const lastUpdated = (
+  <LastUpdated
+    children="Última atualização"
+    locale='pt-BR'
+  />
+)
+
 export default async function RootLayout({ children }) {
   return (
     <html
-      // Not required, but good for SEO
       lang="pt-br"
-      // Required to be set
       dir="ltr"
-      // Suggested by `next-themes` package https://github.com/pacocoursey/next-themes#with-app
       suppressHydrationWarning
     >
-      <Head
-      // ... Your additional head options
-      >
+      <Head>
         {/* Your additional tags should be passed as `children` of `<Head>` element */}
       </Head>
       <body>
@@ -42,7 +50,9 @@ export default async function RootLayout({ children }) {
           pageMap={await getPageMap()}
           docsRepositoryBase="https://github.com/shuding/nextra/tree/main/docs"
           footer={footer}
-          // ... Your additional layout options
+          search={search}
+          lastUpdated={lastUpdated}
+          toc={{ title: 'Nesta página', backToTop: 'Voltar ao topo' }}
         >
           {children}
         </Layout>
