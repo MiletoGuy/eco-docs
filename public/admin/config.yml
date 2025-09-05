@@ -1,0 +1,93 @@
+backend:
+  name: git-gateway # ou "github" quando você ativar OAuth
+  branch: main
+
+local_backend: true
+
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+publish_mode: editorial_workflow
+
+# garante que substiuições virem "_" (ex.: espaço -> "_")
+slug:
+  encoding: "ascii"
+  clean_accents: true
+  sanitize_replacement: "_"
+
+collections:
+  # 1) CRIAR ROTINA (gera content/<Squad>/<Rotina>/index.mdx)
+  - name: "rotinas"
+    label: "Criar rotina (index.mdx)"
+    folder: "content"
+    create: true
+    format: "frontmatter"
+    extension: "mdx"
+
+    # a mágica para colocar no subdiretório certo:
+    # -> content/Squad_Compras/EST004CA/index.mdx
+    path: "{{fields.squad}}/{{fields.rotina}}/index"
+    slug: "index"
+
+    fields:
+      - label: "Squad (tópico)"
+        name: "squad"
+        widget: "select"
+        options: ["Squad_Compras", "Squad_Vendas"]   # adicione outras opções
+        default: "Squad_Compras"
+
+      - label: "Código da rotina"
+        name: "rotina"
+        widget: "string"
+        hint: "Ex.: EST004CA"
+        pattern: ["^[A-Z0-9_]{3,}$", "Use letras maiúsculas, números e '_' (ex.: EST004CA)"]
+
+      - { label: "Título", name: "title", widget: "string", default: "Rotina {{rotina}}" }
+      - { label: "Descrição", name: "description", widget: "string", required: false }
+
+      # Corpo do index.mdx — deixe um esqueleto do VersionView para lembrar o autor
+      - label: "Conteúdo (MDX)"
+        name: "body"
+        widget: "markdown"
+        default: |
+          import VersionView from '@/components/VersionView'
+          // importe as versões de /files/{{rotina}}/ quando existirem:
+          // import V1620 from '/files/{{rotina}}/1_620.mdx'
+          // import V1630 from '/files/{{rotina}}/1_630.mdx'
+
+          <VersionView
+            versions={{
+              // "1_620": <V1620 />,
+              // "1_630": <V1630 />
+            }}
+            defaultVersion=""
+            paramName="v"
+          />
+
+  # 2) CRIAR VERSÃO (gera files/<Rotina>/<Versão>.mdx)
+  - name: "versoes"
+    label: "Criar versão de rotina"
+    folder: "files"
+    create: true
+    format: "frontmatter"
+    extension: "mdx"
+
+    # -> files/EST004CA/1_620.mdx
+    path: "{{fields.rotina}}/{{fields.version}}"
+    slug: "{{fields.version}}"
+
+    fields:
+      - label: "Código da rotina"
+        name: "rotina"
+        widget: "string"
+        hint: "Ex.: EST004CA"
+        pattern: ["^[A-Z0-9_]{3,}$", "Use letras maiúsculas, números e '_' (ex.: EST004CA)"]
+
+      - label: "Versão (nome do arquivo)"
+        name: "version"
+        widget: "string"
+        hint: "Ex.: 1_620 (use '_' no lugar de ponto se preferir)"
+        pattern: ["^[0-9][0-9_\\.]*$", "Use dígitos, '_' ou '.' (ex.: 1_620 ou 1.620)"]
+
+      - { label: "Título", name: "title", widget: "string", default: "Alterações na {{version}}" }
+      - { label: "Conteúdo (MDX)", name: "body", widget: "markdown" }
