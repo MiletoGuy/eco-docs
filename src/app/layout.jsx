@@ -1,7 +1,8 @@
 import { Footer, LastUpdated, Layout, Navbar, NotFoundPage } from 'nextra-theme-docs'
 import { Banner, Head, Search } from 'nextra/components'
 import { getPageMap } from 'nextra/page-map'
-import 'nextra-theme-docs/style.css'
+import './globals.css';
+import 'nextra-theme-docs/style.css'; // depois do Tailwind
 
 export const metadata = {
   // Define your metadata here

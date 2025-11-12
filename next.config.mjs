@@ -12,5 +12,6 @@ export default withNextra({
             // Path to your `mdx-components` file with extension
             'next-mdx-import-source-file': './mdx-components.js'
         }
-    }
+    },
+    pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
 })
