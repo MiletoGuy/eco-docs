@@ -13,6 +13,8 @@ import { Input } from "@/components/ui/input";
 import { ArrowRight, Search, Smartphone, Monitor, Apple } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
+import Lottie from "lottie-react";
+import animationData from "../../public/lotties/Astronaut.json";
 
 const products = [
   {
@@ -126,42 +128,66 @@ export default function Home() {
   );
 
   return (
-    <main className="min-h-screen bg-background text-foreground p-8 md:p-12">
+    <main className="min-h-screen bg-background text-foreground p-8">
       <div className="max-w-6xl mx-auto">
-        <main className="min-h-xl bg-background text-foreground flex flex-col items-center justify-center mb-16 ">
-          {/* Logo */}
-          <Image
-            src="/logos/eco/ecofull.png"
-            alt="Logo Eco Centauro"
-            width={96}
-            height={96}
-            className="mb-6"
-          />
-
-          {/* Título */}
-          <h1
-            className="text-3xl md:text-4xl font-bold text-center mb-10 
-                   bg-gradient-to-r from-blue-500 via-blue-600 to-blue-800 
-                   bg-clip-text text-transparent animate-gradient"
-          >
-            Documentação EcoCentauro
-          </h1>
-
-          {/* Campo de busca */}
-          <div className="relative w-full max-w-2xl">
-            <Search
-              className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"
-              size={18}
-            />
-            <Input
-              type="text"
-              placeholder="Pesquisar produtos..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10 pr-4 py-6 text-base rounded-full shadow-sm bg-card focus-visible:ring-2 focus-visible:ring-blue-600"
+        <section
+          className="
+    relative w-full py-16 px-6 mb-10 
+    bg-gradient-to-br from-gray-200 via-gray-50 to-gray-200
+    text-white flex flex-col items-center justify-center
+    rounded-2xl shadow-lg overflow-hidden
+  "
+        >
+          <div className="absolute left-0 top-1/2 -translate-y-1/2 opacity-90  pointer-events-none z-0">
+            <Lottie
+              animationData={animationData}
+              loop
+              autoplay
+              className="w-60 h-60 md:w-80 md:h-80"
             />
           </div>
-        </main>
+
+          <div className="absolute right-0 top-1/2 -translate-y-1/2 opacity-90 pointer-events-none z-0 scale-x-[-1]">
+            <Lottie
+              animationData={animationData}
+              loop
+              autoplay
+              className="w-60 h-60 md:w-80 md:h-80"
+            />
+          </div>
+
+          {/* Conteúdo acima dos Lotties */}
+          <div className="relative z-10 flex flex-col items-center">
+            {/* Logo */}
+            <Image
+              src="/logos/eco/logo_horizontal.svg"
+              alt="Logo Eco Centauro"
+              width={450}
+              height={96}
+              className="mb-6 drop-shadow-xl"
+            />
+
+            {/* Campo de busca */}
+            <div className="relative w-full max-w-2xl mt-10">
+              <Search
+                className="absolute left-4 top-1/2 -translate-y-1/2 text-blue-400"
+                size={20}
+              />
+              <Input
+                type="text"
+                placeholder="Pesquisar produtos..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="
+          pl-12 pr-4 py-6 text-base rounded-full 
+          bg-white text-black shadow-md 
+          focus-visible:ring-2 focus-visible:ring-blue-400
+        "
+              />
+            </div>
+          </div>
+        </section>
+
         {/* <h1
           className="text-3xl md:text-4xl font-bold mb-12 text-center 
              bg-gradient-to-r from-blue-500 via-blue-600 to-blue-800 
@@ -186,10 +212,19 @@ export default function Home() {
             Nenhum produto encontrado.
           </p>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 ">
             {filteredProducts.map((p) => (
               <Link key={p.slug} href={`/${p.slug}`}>
-                <Card className="group hover:shadow-xl transition-all duration-200 border-border hover:border-primary w-full h-48 flex flex-col justify-between">
+                <Card
+                  className="
+    group 
+    hover:shadow-xl transition-all duration-300
+    border border-border
+    w-full h-48 flex flex-col justify-between
+    bg-white relative
+    
+  "
+                >
                   <CardHeader className="flex flex-row items-center gap-4">
                     <img
                       src={p.logo}

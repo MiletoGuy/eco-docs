@@ -10,17 +10,18 @@ export const metadata = {}
 // const banner = <Banner storageKey="some-key">Banner dahora</Banner>
 
 const navbar = (
-  <Navbar
+  
+  <Navbar 
     logo={
         <Image
           src="/logos/eco/logo_horizontal.svg"
           alt="EcoCentauro"
           width={200}
           height={28}
-          className="rounded-sm"
         />
     }
   />
+  
 )
 
 const footer = <Footer>ECOCENTAURO {new Date().getFullYear()} © ECO.</Footer>
@@ -41,6 +42,7 @@ export default async function RootLayout({ children }) {
     <html lang="pt-br" dir="ltr" suppressHydrationWarning>
       <Head />
       <body>
+      {/* <div className="max-w-6xl mx-auto"> */}
         <Layout
           // banner={banner}
           editLink={"Edite esta página"}
@@ -56,6 +58,7 @@ export default async function RootLayout({ children }) {
         >
           {children}
         </Layout>
+        {/* </div> */}
       </body>
     </html>
   )
