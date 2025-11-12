@@ -12,11 +12,12 @@ import {
 import { Input } from "@/components/ui/input";
 import { ArrowRight, Search, Smartphone, Monitor, Apple } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import Image from "next/image";
 
 const products = [
   {
     name: "EcoOS",
-    slug: "ecoos",
+    slug: "produtos/ecoos",
     description: "Aplicativo de Ordens de Serviço",
     logo: "/logos/ecoos/ecoos.png",
     ios: false,
@@ -25,7 +26,7 @@ const products = [
   },
   {
     name: "Eco360",
-    slug: "eco360",
+    slug: "produtos/eco360",
     description: "Painel de gestão e relatórios",
     logo: "/logos/eco360/eco360.png",
     ios: true,
@@ -34,7 +35,7 @@ const products = [
   },
   {
     name: "EcoColetor",
-    slug: "ecocoletor",
+    slug: "produtos/ecocoletor",
     description: "App de coleta e conferência de produtos",
     logo: "/logos/eco/ecofull.png",
     ios: false,
@@ -43,7 +44,7 @@ const products = [
   },
   {
     name: "EcoLoja Posto",
-    slug: "ecoloja-posto",
+    slug: "produtos/ecoloja-posto",
     description: "App de loja para PDV",
     logo: "/logos/eco/ecofull.png",
     ios: false,
@@ -52,7 +53,7 @@ const products = [
   },
   {
     name: "EcoLoja Posto Client",
-    slug: "ecoloja-posto-client",
+    slug: "produtos/ecoloja-posto-client",
     description: "App cliente de loja/ponto de venda",
     logo: "/logos/eco/ecofull.png",
     ios: false,
@@ -61,7 +62,7 @@ const products = [
   },
   {
     name: "EcoMobile",
-    slug: "ecomobile",
+    slug: "produtos/ecomobile",
     description: "App de força de vendas",
     logo: "/logos/eco/ecofull.png",
     ios: false,
@@ -70,7 +71,7 @@ const products = [
   },
   {
     name: "EcoMobile Client",
-    slug: "ecomobile-client",
+    slug: "produtos/ecomobile-client",
     description: "App cliente do EcoMobile",
     logo: "/logos/eco/ecofull.png",
     ios: false,
@@ -79,7 +80,7 @@ const products = [
   },
   {
     name: "EcoProntaEntrega",
-    slug: "ecoprontaentrega",
+    slug: "produtos/ecoprontaentrega",
     description: "App de entrega de pedidos",
     logo: "/logos/eco/ecofull.png",
     ios: false,
@@ -88,7 +89,7 @@ const products = [
   },
   {
     name: "EcoProntaEntrega Client",
-    slug: "ecoprontaentrega-client",
+    slug: "produtos/ecoprontaentrega-client",
     description: "App cliente de pronta entrega",
     logo: "/logos/eco/ecofull.png",
     ios: false,
@@ -97,7 +98,7 @@ const products = [
   },
   {
     name: "EcoFichaDeVisitas",
-    slug: "ecofichadevisitas",
+    slug: "produtos/ecofichadevisitas",
     description: "App de registro de visitas comerciais",
     logo: "/logos/eco/ecofull.png",
     ios: false,
@@ -106,7 +107,7 @@ const products = [
   },
   {
     name: "EcoServidor",
-    slug: "ecoservidor",
+    slug: "produtos/ecoservidor",
     description: "Integração e serviços backend",
     logo: "/logos/eco/ecofull.png",
     ios: false,
@@ -127,7 +128,41 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-background text-foreground p-8 md:p-12">
       <div className="max-w-6xl mx-auto">
-        <h1
+        <main className="min-h-xl bg-background text-foreground flex flex-col items-center justify-center mb-16 ">
+          {/* Logo */}
+          <Image
+            src="/logos/eco/ecofull.png"
+            alt="Logo Eco Centauro"
+            width={96}
+            height={96}
+            className="mb-6"
+          />
+
+          {/* Título */}
+          <h1
+            className="text-3xl md:text-4xl font-bold text-center mb-10 
+                   bg-gradient-to-r from-blue-500 via-blue-600 to-blue-800 
+                   bg-clip-text text-transparent animate-gradient"
+          >
+            Documentação EcoCentauro
+          </h1>
+
+          {/* Campo de busca */}
+          <div className="relative w-full max-w-2xl">
+            <Search
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"
+              size={18}
+            />
+            <Input
+              type="text"
+              placeholder="Pesquisar produtos..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="pl-10 pr-4 py-6 text-base rounded-full shadow-sm bg-card focus-visible:ring-2 focus-visible:ring-blue-600"
+            />
+          </div>
+        </main>
+        {/* <h1
           className="text-3xl md:text-4xl font-bold mb-12 text-center 
              bg-gradient-to-r from-blue-500 via-blue-600 to-blue-800 
              bg-clip-text text-transparent animate-gradient"
@@ -135,7 +170,6 @@ export default function Home() {
           Documentação dos Produtos Eco Centauro
         </h1>
 
-        {/* Campo de busca */}
         <div className="flex items-center gap-2 mx-auto mb-10">
           <Input
             type="text"
@@ -144,7 +178,7 @@ export default function Home() {
             onChange={(e) => setSearchTerm(e.target.value)}
             className="bg-card text-base h-12 px-4"
           />
-        </div>
+        </div> */}
 
         {/* Lista filtrada */}
         {filteredProducts.length === 0 ? (
