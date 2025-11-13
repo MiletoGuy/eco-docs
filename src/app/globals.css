@@ -118,4 +118,8 @@
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
 }
+.body-dotted {
+  background-image: radial-gradient(rgba(0,0,0,0.09) 1px, transparent 1px);
+  background-size: 15px 15px;
+}
 

@@ -10,7 +10,14 @@ import {
   CardContent,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { ArrowRight, Search, Smartphone, Monitor, Apple } from "lucide-react";
+import {
+  ArrowRight,
+  Search,
+  Smartphone,
+  Monitor,
+  Apple,
+  BookOpen,
+} from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import Lottie from "lottie-react";
@@ -25,6 +32,8 @@ const products = [
     ios: false,
     android: true,
     windows: false,
+    web: false,
+    version: "2.1.226",
   },
   {
     name: "Eco360",
@@ -34,6 +43,8 @@ const products = [
     ios: true,
     android: true,
     windows: false,
+    web: false,
+    version: "2.1.226",
   },
   {
     name: "EcoColetor",
@@ -43,6 +54,8 @@ const products = [
     ios: false,
     android: true,
     windows: false,
+    web: false,
+    version: "2.1.226",
   },
   {
     name: "EcoLoja Posto",
@@ -52,6 +65,8 @@ const products = [
     ios: false,
     android: true,
     windows: false,
+    web: false,
+    version: "2.1.226",
   },
   {
     name: "EcoLoja Posto Client",
@@ -61,6 +76,8 @@ const products = [
     ios: false,
     android: false,
     windows: true,
+    web: false,
+    version: "2.1.226",
   },
   {
     name: "EcoMobile",
@@ -70,6 +87,8 @@ const products = [
     ios: false,
     android: true,
     windows: false,
+    web: false,
+    version: "2.1.226",
   },
   {
     name: "EcoMobile Client",
@@ -79,6 +98,8 @@ const products = [
     ios: false,
     android: false,
     windows: true,
+    web: false,
+    version: "2.1.226",
   },
   {
     name: "EcoProntaEntrega",
@@ -88,6 +109,8 @@ const products = [
     ios: false,
     android: true,
     windows: false,
+    web: false,
+    version: "2.1.226",
   },
   {
     name: "EcoProntaEntrega Client",
@@ -97,6 +120,8 @@ const products = [
     ios: false,
     android: false,
     windows: true,
+    web: false,
+    version: "2.1.226",
   },
   {
     name: "EcoFichaDeVisitas",
@@ -105,7 +130,9 @@ const products = [
     logo: "/logos/eco/ecofull.png",
     ios: false,
     android: false,
-    windows: true,
+    windows: false,
+    web: true,
+    version: "2.1.226",
   },
   {
     name: "EcoServidor",
@@ -115,6 +142,8 @@ const products = [
     ios: false,
     android: false,
     windows: true,
+    web: false,
+    version: "2.1.226",
   },
 ];
 
@@ -128,11 +157,11 @@ export default function Home() {
   );
 
   return (
-    <main className="min-h-screen bg-background text-foreground p-8">
+    <main className="min-h-screen bg-background text-foreground pb-8 pt-6 body-dotted">
       <div className="max-w-6xl mx-auto">
         <section
           className="
-    relative w-full py-16 px-6 mb-10 
+    relative w-full py-8 px-6 mb-8 
     bg-gradient-to-br from-gray-200 via-gray-50 to-gray-200
     text-white flex flex-col items-center justify-center
     rounded-2xl shadow-lg overflow-hidden
@@ -158,6 +187,16 @@ export default function Home() {
 
           {/* Conteúdo acima dos Lotties */}
           <div className="relative z-10 flex flex-col items-center">
+            {/* Badge de Documentação */}
+            <div className="flex justify-center">
+              <Badge
+                variant="secondary"
+                className="px-4 py-1.5 text-sm font-medium flex items-center gap-2"
+              >
+                <BookOpen size={16} className="text-primary" />
+                Central de Documentação
+              </Badge>
+            </div>
             {/* Logo */}
             <Image
               src="/logos/eco/logo_horizontal.svg"
@@ -166,6 +205,17 @@ export default function Home() {
               height={96}
               className="mb-6 drop-shadow-xl"
             />
+
+            {/* Título e Descrição */}
+            <div className="text-center">
+              {/* <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-3">
+              Documentação dos Produtos
+            </h1> */}
+              <p className="text-md text-muted-foreground  mx-auto">
+                Encontre guias, manuais e recursos completos para todos os
+                produtos EcoCentauro
+              </p>
+            </div>
 
             {/* Campo de busca */}
             <div className="relative w-full max-w-2xl mt-10">
@@ -188,24 +238,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* <h1
-          className="text-3xl md:text-4xl font-bold mb-12 text-center 
-             bg-gradient-to-r from-blue-500 via-blue-600 to-blue-800 
-             bg-clip-text text-transparent animate-gradient"
-        >
-          Documentação dos Produtos Eco Centauro
-        </h1>
-
-        <div className="flex items-center gap-2 mx-auto mb-10">
-          <Input
-            type="text"
-            placeholder="Buscar produto..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="bg-card text-base h-12 px-4"
-          />
-        </div> */}
-
         {/* Lista filtrada */}
         {filteredProducts.length === 0 ? (
           <p className="text-center text-muted-foreground mt-8">
@@ -225,13 +257,24 @@ export default function Home() {
     
   "
                 >
-                  <CardHeader className="flex flex-row items-center gap-4">
-                    <img
-                      src={p.logo}
-                      alt={p.name}
-                      className="w-32 h-12 object-contain rounded-md"
-                    />
-                    <div>
+                  <CardHeader className="flex flex-row items-start gap-4 relative">
+                    <div className="flex flex-col items-start">
+                      <img
+                        src={p.logo}
+                        alt={p.name}
+                        className="w-32 h-12 object-contain rounded-md"
+                      />
+
+                      {/* Badge da versão */}
+                      <Badge
+                        variant="secondary"
+                        className="mt-2 px-2 py-0.5 text-[10px] font-medium bg-blue-500/10 text-blue-600"
+                      >
+                        Versão {p.version}
+                      </Badge>
+                    </div>
+
+                    <div className="flex-1 mt-1">
                       <CardTitle className="text-lg font-semibold">
                         {p.name}
                       </CardTitle>
@@ -272,6 +315,15 @@ export default function Home() {
                           <span className="text-xs text-foreground">
                             Windows
                           </span>
+                        </Badge>
+                      )}
+                      {p.web && (
+                        <Badge
+                          variant="outline"
+                          className="flex items-center gap-1 border-border/90 px-2 py-0.5"
+                        >
+                          <Monitor size={14} className="text-purple-500" />
+                          <span className="text-xs text-foreground">Web</span>
                         </Badge>
                       )}
                     </div>
